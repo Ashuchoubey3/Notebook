@@ -18,9 +18,7 @@ app.get("/", (req, res) => {
 });
 
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
-});
+
 const noteSchema = new mongoose.Schema({
   noteId: { type: String, unique: true },
   content: String,
@@ -55,3 +53,6 @@ app.get("/note/:id", async (req, res) => {
 
   res.json(note);
 });
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
