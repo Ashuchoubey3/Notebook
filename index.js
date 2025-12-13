@@ -8,16 +8,18 @@ app.use(express.json());
 app.use(cors());
 
 // MongoDB connection
+// Replace this with your online MongoDB URI if deploying on Render
+// Example: mongodb+srv://<username>:<password>@cluster0.mongodb.net/notebook?retryWrites=true&w=majority
+const mongoURI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/notebook";
+
 mongoose
-  .connect("mongodb://127.0.0.1:27017/notebook")
+  .connect(mongoURI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
 app.get("/", (req, res) => {
   res.send("Server is running successfully");
 });
-
-
 
 const noteSchema = new mongoose.Schema({
   noteId: { type: String, unique: true },
@@ -26,6 +28,7 @@ const noteSchema = new mongoose.Schema({
 });
 
 const Note = mongoose.model("Note", noteSchema);
+
 app.post("/save", async (req, res) => {
   const { content } = req.body;
 
@@ -53,3 +56,7 @@ app.get("/note/:id", async (req, res) => {
 
   res.json(note);
 });
+
+// Use dynamic port for Render
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
