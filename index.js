@@ -20,10 +20,10 @@ mongoose
   const path = require("path");
 
   // Serve frontend files
-  app.use(express.static(path.join(__dirname, "frontend")));
+  app.use(express.static(path.join(__dirname, "Frontend")));
 
   app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "frontend", "index.html"));
+    res.sendFile(path.join(__dirname, "Frontend", "index.html"));
   });
 
 
