@@ -17,6 +17,16 @@ mongoose
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
 
+  const path = require("path");
+
+  // Serve frontend files
+  app.use(express.static(path.join(__dirname, "frontend")));
+
+  app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "index.html"));
+  });
+
+
 app.get("/", (req, res) => {
   res.send("Server is running successfully");
 });
