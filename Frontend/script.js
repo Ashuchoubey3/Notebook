@@ -1,4 +1,4 @@
-const backendURL = "https://notebook-app.onrender.com"; // Replace with your Render URL
+const backendURL = "https://notebook-app.onrender.com"; 
 
 function saveNote() {
   const noteText = document.getElementById("note").value;
