@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Unique ID Notebook</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  
+</head>
+<body>
+  <div class="container">
+    <div class="section">
+      <h2>Write Your Note</h2>
+      <textarea id="note" rows="6" placeholder="Write something important..."></textarea>
+      <br>
+      <button onclick="saveNote()">Save Note</button>
+      <p id="result"></p>
+   
+
+
+    </div>
+
+    <hr>
+
+    <div class="section">
+      <h2>Open Your Note</h2>
+      <input type="text" id="noteId" placeholder="Enter your Unique ID">
+      <button onclick="getNote()">Open Note</button>
+      <p id="output"></p>
+    </div>
+  </div>
