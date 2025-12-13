@@ -29,7 +29,8 @@ function getNote() {
     return;
   }
 
-  fetch("http://localhost:3000/note/" + id)
+fetch("https://notebook-app.onrender.com/note/" + id)
+
     .then((res) => res.json())
     .then((data) => {
       document.getElementById("output").innerText =
