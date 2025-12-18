@@ -3,53 +3,89 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const { nanoid } = require("nanoid");
 const path = require("path");
-require("dotenv").config(); // load MONGO_URI from .env
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-// MongoDB connection
-const mongoURI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/notebook";
+// ------------------------
+// MongoDB Connection
+// ------------------------
+const mongoUri = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/notebook";
+
 mongoose
-  .connect(mongoURI)
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.log(err));
+  .connect(mongoUri) 
+  .then(() =>
+    console.log(
+      `✅ MongoDB connected: ${
+        mongoUri.includes("127.0.0.1") ? "Local" : "Atlas"
+      }`
+    )
+  )
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+    process.exit(1);
+  });
 
-// Serve frontend files
-app.use(express.static(path.join(__dirname, "Frontend")));
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "Frontend", "index.html"));
-});
-
+// ------------------------
 // Note Schema
+// ------------------------
 const noteSchema = new mongoose.Schema({
   noteId: { type: String, unique: true },
-  content: String,
+  content: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
 });
 
 const Note = mongoose.model("Note", noteSchema);
 
-// Save note
+// ------------------------
+// Save Note Route
+// ------------------------
 app.post("/save", async (req, res) => {
-  const { content } = req.body;
-  const uniqueId = nanoid(14);
+  try {
+    const { content } = req.body;
 
-  const note = new Note({ noteId: uniqueId, content });
-  await note.save();
+    if (!content || content.trim() === "") {
+      return res.status(400).json({ message: "Note content cannot be empty" });
+    }
 
-  res.json({ message: "Note saved", noteId: uniqueId });
+    const uniqueId = nanoid(14);
+    const note = new Note({ noteId: uniqueId, content });
+    await note.save();
+
+    res.json({ message: "Note saved", noteId: uniqueId });
+  } catch (err) {
+    console.error("Error saving note:", err);
+    res.status(500).json({ message: "Error saving note. Please try again." });
+  }
 });
 
-// Get note by ID
+// ------------------------
+// Get Note by ID Route
+// ------------------------
 app.get("/note/:id", async (req, res) => {
-  const note = await Note.findOne({ noteId: req.params.id });
-  if (!note) return res.status(404).json({ message: "Not found" });
-  res.json(note);
+  try {
+    const note = await Note.findOne({ noteId: req.params.id });
+    if (!note) return res.status(404).json({ message: "Note not found" });
+
+    res.json(note);
+  } catch (err) {
+    console.error("Error fetching note:", err);
+    res.status(500).json({ message: "Error fetching note" });
+  }
 });
 
-// Use dynamic port for Render
+// ------------------------
+// Serve Frontend (after API routes)
+// ------------------------
+app.use(express.static(path.join(__dirname, "Frontend")));
+
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, "Frontend", "index.html"));
+});
+
+// ------------------------
+// Start Server
+// ------------------------
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
