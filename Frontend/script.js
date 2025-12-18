@@ -2,8 +2,8 @@
 const backendURL =
   window.location.hostname === "localhost" ||
   window.location.hostname === "127.0.0.1"
-    ? "http://localhost:3000" // for local testing
-    : window.location.origin; // for Render deployed site
+    ? "http://localhost:3000" 
+    : window.location.origin; 
 
 function saveNote() {
   const noteText = document.getElementById("note").value.trim();
@@ -37,6 +37,15 @@ function saveNote() {
       alert("Error saving note. Please try again.");
     });
 }
+require("dotenv").config();
+
+const mongoUri = process.env.MONGO_URI;
+
+mongoose
+  .connect(mongoUri)
+  .then(() => console.log("✅ MongoDB connected: Atlas"))
+  .catch((err) => console.error("MongoDB connection error:", err));
+
 
 function getNote() {
   const id = document.getElementById("noteId").value.trim();

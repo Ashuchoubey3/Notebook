@@ -17,7 +17,7 @@ mongoose
   .connect(mongoUri) 
   .then(() =>
     console.log(
-      `✅ MongoDB connected: ${
+      ` MongoDB connected: ${
         mongoUri.includes("127.0.0.1") ? "Local" : "Atlas"
       }`
     )

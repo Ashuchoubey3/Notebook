@@ -14,7 +14,15 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
-    "mongoose": "^9.0.1",
+    "mongoose": "^9.0.2",
     "nanoid": "^5.1.6"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ashuchoubey3/Notebook.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Ashuchoubey3/Notebook/issues"
+  },
+  "homepage": "https://github.com/Ashuchoubey3/Notebook#readme"
 }
