@@ -1,88 +1,501 @@
- * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+* { 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-    body {
-      background-color: #f0f2f5;
-      padding: 30px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-    }
+body {
+ /* background: linear-gradient(135deg, #efbfc4, #a2dd9d);*/
 
-    h2 {
-      color: #333;
-      margin-bottom: 15px;
-      text-align: center;
-    }
+  min-height: 100vh;  padding: 30px;
+  min-height: 100vh;
+  position: relative;
+}
 
-    textarea, input[type="text"] {
-      width: 100%;
-      max-width: 500px;
-      padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
-      margin-bottom: 15px;
-      resize: vertical;
-    }
+/* Container styling */
+.container {
+  width: 100%;
+  max-width: 1000px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  margin: 0 auto;
+}
 
-    button {
-      padding: 12px 25px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    #cpyBtn {
-      padding: 12px 25px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
+h1 {
+  text-align: center;
+  margin-bottom: 10px;
+}
 
-    button:hover {
-      background-color: #45a049;
-    }
+.subtitle {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #555;
+}
 
-    hr {
-      margin: 30px 0;
-      border: none;
-      height: 1px;
-      background-color: #ccc;
-      width: 100%;
-      max-width: 600px;
-    }
+/* Dashboard Flex Layout */
+.dashboard {
+  display: flex;
+  gap: 30px;
+}
 
-    #result, #output {
-      margin-top: 10px;
-      color: #555;
-      font-size: 16px;
-      word-break: break-word;
-      max-width: 500px;
-      text-align: center;
-    }
+/* Left: Write note */
+.note-section {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
 
-    .container {
-      width: 100%;
-      max-width: 600px;
-      background-color: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
+.note-section textarea {
+  width: 100%;
+  height: 300px;      /* fixed height */
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  overflow-y: auto;   /* vertical scrollbar if content exceeds */
+  margin-bottom: 15px;
+}
 
-    .section {
-      margin-bottom: 40px;
-    }
+.note-section button {
+  width: 150px;
+  padding: 12px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.note-section button:hover {
+  background-color: #45a049;
+}
+
+#result {
+  margin-top: 10px;
+  color: #555;
+  font-size: 16px;
+}
+
+/* Right: Saved notes */
+.saved-notes {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  max-height: 500px;
+  overflow-y: auto;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.saved-notes h2 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.saved-notes ul {
+  list-style: none;
+}
+
+.saved-notes li {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.saved-notes li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Logout button fixed top-right */
+#logoutBtn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 8px 16px;
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+#logoutBtn:hover {
+  background-color: #e04344;
+}
+
+/* Responsive for smaller screens */
+@media screen and (max-width: 900px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .note-section, .saved-notes {
+    flex: unset;
+    width: 100%;
+  }
+
+  .note-section button {
+    width: 100%;
+  }
+}
+
+/* Profile */
+#profileCircle {
+  position: fixed;
+  left: 20px;
+  top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  background-color: #4caf50; /* green circle */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.profile-text p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.profile-text #userName {
+  font-weight: bold;
+}
+
+/* Modal background */
+.primary-btn {
+  background-color: #28a745; 
+  color: #fff;              
+  padding: 10px 20px;      
+  border: none;           
+  border-radius: 5px;     
+  cursor: pointer;        
+  font-size: 16px;          
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+.primary-btn:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal box */
+.modal-content {
+  background: white;
+  padding: 20px;
+  width: 320px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-actions button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal-actions .save-btn {
+  background: #4caf50;
+  color: white;
+}
+
+.notes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.saved-note {
+  background: #f5f7fa;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.saved-note:hover {
+  background: #e9eef5;
+}
+
+.saved-note h4 {
+  margin: 0;
+  font-size: 15px;
+  color: #333;
+}
+
+/* Hidden content */
+.saved-note p {
+  display: none;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #555;
+  white-space: pre-wrap;
+}
+
+/* When active */
+.saved-note.active p {
+  display: block;
+}
+ /* Theme Toggle Button */
+ /* Dark Theme */
+/* ===================== DARK THEME ===================== */
+body.dark {
+  background: #0b1220;
+  color: #e5e7eb;
+}
+
+/* Main container */
+body.dark .container {
+  background: #0f172a;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+/* Headings */
+body.dark h1,
+body.dark h2,
+body.dark h3 {
+  color: #e5e7eb;
+}
+
+body.dark .subtitle {
+  color: #94a3b8;
+}
+
+/* Cards */
+body.dark .note-section,
+body.dark .saved-notes {
+  background: #111827;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+/* Textarea & Inputs */
+body.dark textarea,
+body.dark input {
+  background: #020617;
+  color: #e5e7eb;
+  border: 1px solid #1e293b;
+}
+
+body.dark textarea::placeholder,
+body.dark input::placeholder {
+  color: #64748b;
+}
+
+/* Saved notes items */
+body.dark .saved-note {
+  background: #020617;
+  border: 1px solid #1e293b;
+}
+
+body.dark .saved-note:hover {
+  background: #020617;
+  border-color: #3b82f6;
+}
+
+body.dark .saved-note h4 {
+  color: #e5e7eb;
+}
+
+body.dark .saved-note p {
+  color: #cbd5f5;
+}
+
+/* Modal */
+body.dark .modal-content {
+  background: #020617;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+}
+
+body.dark .modal-content h3 {
+  color: #e5e7eb;
+}
+
+/* ===================== BUTTONS ===================== */
+
+/* Save note button */
+body.dark .note-section button {
+  background: #22c55e;
+}
+
+body.dark .note-section button:hover {
+  background: #16a34a;
+}
+
+/* Modal buttons */
+body.dark #saveTitle {
+  background: #22c55e;
+}
+
+body.dark #cancelTitle {
+  background: #1e293b;
+  color: #e5e7eb;
+}
+
+/* ===================== PROFILE ===================== */
+body.dark .avatar {
+  background: #22c55e;
+}
+
+body.dark .profile-text p {
+  color: #cbd5f5;
+}
+
+/* ===================== DARK TOGGLE BUTTON ===================== */
+#themeToggle {
+  position: fixed;
+  top: 20px;
+  right: 120px; /* beside logout */
+  padding: 8px 16px;
+  background: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+#themeToggle:hover {
+  background: #16a34a;
+}
+
+/* Search box inside Saved Notes */
+.search-notes {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #2a2f45;
+  background: rgba(255, 255, 255, 0.06);
+  color: #e5e7eb;
+  font-size: 14px;
+  outline: none;
+}
+
+.search-notes::placeholder {
+  color: #9ca3af;
+}
+
+.search-notes:focus {
+  border-color: #22c55e;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.3);
+}
+
+/* Light mode fix */
+body:not(.dark) .search-notes {
+  background: #fff;
+  color: #111;
+  border: 1px solid #ccc;
+}
+
+body:not(.dark) .search-notes::placeholder {
+  color: #666;
+}
+
+/* ===================== for showing date while saving note ===================== */
+.note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.note-date {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Dark mode */
+body.dark .note-date {
+  color: #9ca3af;
+}
+
+
+===================== after note selct edit share option visible =====================
+#noteActions {
+  display: flex;
+  gap: 10px; /* space between buttons */
+  margin-top: 10px;
+  justify-content: flex-start; /* align buttons to the left */
+}
+
+#noteActions button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Specific button colors to match your site */
+#noteActions .edit-btn {
+  background-color: #ffa940; /* orange */
+  color: #fff;
+}
+
+#noteActions button:nth-child(2) {
+  background-color: #1890ff; /* blue for share */
+  color: #fff;
+}
+
+#noteActions button:nth-child(3) {
+  background-color: #25d366; /* green for WhatsApp */
+  color: #fff;
+}
+
+#noteActions button:nth-child(4) {
+  background-color: #ff4d4f; /* red for delete */
+  color: #fff;
+}
+
+/* Hover effect */
+#noteActions button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}

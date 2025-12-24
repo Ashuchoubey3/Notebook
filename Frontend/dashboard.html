@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Unique Notebook Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="dashboard.js"></script>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div id="profileCircle">
+        <div class="avatar">
+          <span id="userInitials">A</span>
+        </div>
+        <div class="profile-text">
+          <p id="userName"></p>
+          <p id="userId"></p>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <button id="themeToggle">🌙 Dark</button>
+        <button id="logoutBtn">Logout</button>
+      </div>
+    </nav>
+
+    <!-- DASHBOARD CARD -->
+    <div class="dashboard-wrapper">
+      <h1>Unique Notebook</h1>
+      <p class="subtitle">Your notes are saved with your Unique ID</p>
+
+      <div class="dashboard">
+        <!-- WRITE NOTE -->
+        <div class="note-section card">
+          <h2>Write Your Note</h2>
+          <textarea
+            id="note"
+            placeholder="Write something important..."
+          ></textarea>
+          <button id="saveBtn" class="primary-btn">Save Note</button>
+        </div>
+
+        <!-- SAVED NOTES -->
+
+        <div class="saved-notes card">
+          <h2>Saved Notes</h2>
+          <input
+            type="text"
+            id="searchNotes"
+            class="search-notes"
+            placeholder="Search notes..."
+          />
+          <div id="savedNotes" class="notes-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TITLE MODAL -->
+    <div id="titleModal" class="modal">
+      <div class="modal-content">
+        <h3>Enter Note Title</h3>
+        <input type="text" id="noteTitle" placeholder="Note title..." />
+        <div class="modal-actions">
+          <button onclick="closeModal()">Cancel</button>
+          <button class="primary-btn" onclick="confirmSave()">Save</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

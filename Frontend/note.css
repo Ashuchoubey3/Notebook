@@ -1,0 +1,53 @@
+/* Note Page */
+.note-page-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+.note-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.note-actions button {
+  margin-left: 0.5rem;
+}
+
+/* Note Card */
+.note-content-card {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.note-content-card h1 {
+  margin-top: 0;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.note-content-card p {
+  font-size: 1rem;
+  color: #555;
+  white-space: pre-wrap; /* preserves line breaks */
+}
+
+/* Buttons */
+.btn.back {
+  background-color: #ccc;
+  color: #333;
+}
+
+.btn.save {
+  background-color: #6c63ff;
+  color: #fff;
+}
+
+.btn.delete {
+  background-color: #ff6b6b;
+  color: #fff;
+}
