@@ -1,42 +1,82 @@
+/* Base styles */
 body {
-  font-family: Arial, sans-serif;
-  background: #eef1f5;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: #f9f9f9;
+  color: #333;
+}
+
+/* Container - top-aligned */
+.container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-items: flex-start; /* Top aligned */
+  padding: 50px 20px; /* Push content from top */
+  min-height: 100vh;
 }
 
-.note-wrapper {
-  background: white;
-  padding: 30px;
-  width: 70%;
-  max-width: 700px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+/* Note card */
+.note-card {
+  background: #fff;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 8px;
+  padding: 30px 25px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
 }
 
-.note-wrapper h2 {
+/* Title */
+#noteTitle {
+  font-size: 1.8rem;
+  font-weight: bold;
   margin-bottom: 15px;
+  color: #111;
 }
 
+/* Content */
 #noteContent {
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1.6;
+  color: #444;
+  white-space: pre-wrap;
 }
 
-#noteTime {
-  display: block;
-  margin-top: 15px;
-  color: #666;
-}
-
-button {
-  margin-top: 20px;
-  padding: 8px 14px;
-  border: none;
-  border-radius: 6px;
+/* Back button */
+.back-btn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 10px 20px;
+  text-decoration: none;
   background: #4caf50;
-  color: white;
-  cursor: pointer;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.back-btn:hover {
+  background: #3ebe3e;
+}
+
+/* Dark mode */
+body.dark {
+  background: #1e1e1e;
+  color: #ddd;
+}
+
+body.dark .note-card {
+  background: #2b2b2b;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+body.dark #noteContent {
+  color: #ccc;
+}
+
+body.dark .back-btn {
+  background: #0284c7;
+}
+
+body.dark .back-btn:hover {
+  background: #0369a1;
 }

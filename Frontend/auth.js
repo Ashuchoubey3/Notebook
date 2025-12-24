@@ -2,9 +2,10 @@
 // BACKEND URL (unchanged)
 // ------------------------
 const backendURL =
-  window.location.hostname === "localhost"
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1"
     ? "http://localhost:3000"
-    : "https://book-backend.onrender.com";
+    : window.location.origin;
 
 // ------------------------
 // SLIDER TOGGLE (UI)
