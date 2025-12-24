@@ -1,45 +1,41 @@
-// const uniqueId = localStorage.getItem("uniqueId");
+// ------------------------
+// Backend URL
+// ------------------------
+const backendURL = "https://my-unique-notebook-backend.onrender.com";
 
-// if (!uniqueId) {
-//   alert("Please login first");
-//   window.location.href = "/auth.html"; // STOP HERE
-//   throw new Error("Not logged in");
-// }
+// const backendURL =
+//   location.hostname === "localhost" ? "http://localhost:3000" : location.origin;
 
-const backendURL =
-  location.hostname === "localhost" ? "http://localhost:3000" : location.origin;
-
+// ------------------------
+// GET noteId FROM URL
+// ------------------------
 const params = new URLSearchParams(window.location.search);
-const noteId = params.get("id");
+const noteId = params.get("noteId");
 
-// SAFETY CHECK
 if (!noteId) {
-  alert("Invalid note");
-  window.location.href = "/dashboard.html";
+  document.body.innerHTML = "<h2> Invalid note</h2>";
+  throw new Error("No noteId found");
 }
 
+// ------------------------
+// LOAD NOTE
+// ------------------------
 async function loadNote() {
   try {
-    const res = await fetch(`${backendURL}/note/single/${noteId}`);
-    const data = await res.json();
+    const res = await fetch(`${backendURL}/note/view/${noteId}`);
 
-    if (!data.note) {
-      alert("Note not found");
-      return;
+    if (!res.ok) {
+      throw new Error("Note not found");
     }
 
-    document.getElementById("noteContent").textContent = data.note.content;
+    const data = await res.json();
 
-    document.getElementById("noteTime").textContent = new Date(
-      data.note.createdAt
-    ).toLocaleString();
+    document.getElementById("noteTitle").innerText = data.note.title;
+    document.getElementById("noteContent").innerText = data.note.content;
   } catch (err) {
-    console.error("Error loading note:", err);
+    console.error(err);
+    document.getElementById("noteContent").innerText = " No note found";
   }
 }
 
-function goBack() {
-  window.location.href = "/dashboard.html";
-}
-
-loadNote();
+document.addEventListener("DOMContentLoaded", loadNote);

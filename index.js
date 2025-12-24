@@ -163,16 +163,26 @@ app.delete("/note/:noteId", async (req, res) => {
 });
 
 // Get single note by noteId
-app.get("/noteById/:noteId", async (req, res) => {
+// GET SINGLE NOTE BY ID
+// ------------------------
+// VIEW SINGLE NOTE (BY _id)
+// ------------------------
+app.get("/note/view/:id", async (req, res) => {
   try {
-    const note = await Note.findOne({ noteId: req.params.noteId });
-    if (!note) return res.status(404).json({ message: "Note not found" });
+    const note = await Note.findById(req.params.id);
+
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
+
     res.json({ note });
   } catch (err) {
-    console.error("Fetch note error:", err);
+    console.error("View note error:", err);
     res.status(500).json({ message: "Error fetching note" });
   }
 });
+
+
 // Get single note by noteId
 // app.get("/noteById/:noteId", async (req, res) => {
 //   try {
@@ -196,20 +206,20 @@ app.get("/noteById/:noteId", async (req, res) => {
 //   }
 // });
 
-app.get("/note/single/:id", async (req, res) => {
-  try {
-    const note = await Note.findById(req.params.id);
-    res.json({ note });
-  } catch (err) {
-    res.status(500).json({ message: "Error fetching note" });
-  }
-});
+// app.get("/note/single/:id", async (req, res) => {
+//   try {
+//     const note = await Note.findById(req.params.id);
+//     res.json({ note });
+//   } catch (err) {
+//     res.status(500).json({ message: "Error fetching note" });
+//   }
+// });
 
 // ------------------------
 // Serve Frontend
 // ------------------------
 app.use(express.static(path.join(__dirname, "Frontend")));
-app.use((req, res) => {
+app.use("*", (req, res) => {
   res.sendFile(path.join(__dirname, "Frontend", "auth.html"));
 });
 
