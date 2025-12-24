@@ -2,10 +2,9 @@
 // BACKEND URL (unchanged)
 // ------------------------
 const backendURL =
-  window.location.hostname === "localhost" ||
-  window.location.hostname === "127.0.0.1"
+  window.location.hostname === "localhost"
     ? "http://localhost:3000"
-    : window.location.origin;
+    : "https://book-backend.onrender.com";
 
 // ------------------------
 // SLIDER TOGGLE (UI)
@@ -60,6 +59,9 @@ document
       }
 
       // Save data
+      localStorage.setItem("uniqueId", res.uniqueId);
+      localStorage.setItem("userName", res.name);
+
       localStorage.setItem("uniqueId", data.uniqueId);
       localStorage.setItem("userName", data.name);
 

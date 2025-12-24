@@ -9,7 +9,15 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000", // local testing
+      "https://book-38lz.onrender.com", // live frontend
+    ],
+  })
+);
+
 
 // MongoDB Connection
 const mongoUri = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/notebook";
@@ -219,7 +227,7 @@ app.get("/note/view/:id", async (req, res) => {
 // Serve Frontend
 // ------------------------
 app.use(express.static(path.join(__dirname, "Frontend")));
-app.use("*", (req, res) => {
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "Frontend", "auth.html"));
 });
 
