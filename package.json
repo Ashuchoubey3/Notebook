@@ -6,15 +6,12 @@
   "scripts": {
     "start": "node index.js"
   },
-  
   "note": {
     "_id": "abc123",
     "title": "My Note",
     "content": "This is note content",
     "createdAt": "2025-12-23T23:50:00.000Z"
   },
-
-
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -24,7 +21,7 @@
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "mongoose": "^9.0.2",
-    "nanoid": "^3.3.11"
+    "nanoid": "^3.3.4"
   },
   "repository": {
     "type": "git",
