@@ -40,3 +40,27 @@ async function loadNote() {
 }
 
 document.addEventListener("DOMContentLoaded", loadNote);
+
+//download note as txt file//
+function downloadNote() {
+  const noteContent = document.getElementById("noteContent").innerText;
+
+  if (!noteContent.trim()) {
+    alert("Note is empty");
+    return;
+  }
+
+  const blob = new Blob([noteContent], { type: "text/plain" });
+  const url = window.URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `note-${new Date().getTime()}.txt`;
+
+  document.body.appendChild(a);
+  a.click();
+
+  document.body.removeChild(a);
+  window.URL.revokeObjectURL(url);
+}
+

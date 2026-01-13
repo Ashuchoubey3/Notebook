@@ -104,7 +104,7 @@ async function getNotes() {
       const div = document.createElement("div");
       div.className = "saved-note";
 
-      const id = note._id ; 
+      const id = note._id;
 
       const date = new Date(note.createdAt).toLocaleString("en-IN", {
         day: "2-digit",
@@ -228,7 +228,6 @@ function showSharePopup(message) {
 // ------------------------
 async function deleteNote(noteId) {
   if (!noteId) return alert("Invalid note ID");
-
   try {
     const res = await fetch(`${backendURL}/note/${noteId}`, {
       method: "DELETE",
@@ -316,3 +315,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // LOAD NOTES
   getNotes();
 });
+//image file uploded function//
+// const fileInput = document.getElementById("fileInput");
+// const fileName = document.getElementById("fileName");
+
+// let selectedFile = null;
+
+// fileInput.addEventListener("change", () => {
+//   selectedFile = fileInput.files[0];
+//   if (selectedFile) {
+//     fileName.textContent = `Selected: ${selectedFile.name}`;
+//   }
+// });

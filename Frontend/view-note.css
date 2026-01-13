@@ -1,82 +1,96 @@
-/* Base styles */
-body {
+/* RESET */
+* {
   margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: #f9f9f9;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* PAGE BACKGROUND */
+body {
+  background-color: #f4f6f8;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* MAIN CONTAINER */
+.container {
+  width: 100%;
+  max-width: 900px;
+  padding: 20px;
+}
+
+/* NOTE CARD */
+.note-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 24px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* ACTION BAR (Back + Download) */
+.note-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* COMMON BUTTON STYLE */
+.back-btn,
+.download-btn {
+  padding: 10px 18px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* BACK BUTTON */
+.back-btn {
+  background-color: #4caf50;
+}
+
+/* DOWNLOAD BUTTON */
+.download-btn {
+  background-color: #28a745;
+}
+
+.back-btn:hover,
+.download-btn:hover {
+  opacity: 0.9;
+}
+
+/* NOTE TITLE */
+#noteTitle {
+  font-size: 22px;
+  margin-bottom: 12px;
   color: #333;
 }
 
-/* Container - top-aligned */
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start; /* Top aligned */
-  padding: 50px 20px; /* Push content from top */
-  min-height: 100vh;
-}
-
-/* Note card */
-.note-card {
-  background: #fff;
-  width: 100%;
-  max-width: 600px;
-  border-radius: 8px;
-  padding: 30px 25px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-}
-
-/* Title */
-#noteTitle {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: #111;
-}
-
-/* Content */
+/* NOTE CONTENT */
 #noteContent {
-  font-size: 1rem;
+  font-size: 16px;
   line-height: 1.6;
   color: #444;
   white-space: pre-wrap;
 }
 
-/* Back button */
-.back-btn {
-  display: inline-block;
-  margin-top: 25px;
-  padding: 10px 20px;
-  text-decoration: none;
-  background: #4caf50;
-  color: #fff;
-  border-radius: 6px;
-  font-weight: 500;
-  transition: background 0.2s ease;
-}
+/* RESPONSIVE (MOBILE) */
+@media (max-width: 600px) {
+  .note-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
 
-.back-btn:hover {
-  background: #3ebe3e;
-}
-
-/* Dark mode */
-body.dark {
-  background: #1e1e1e;
-  color: #ddd;
-}
-
-body.dark .note-card {
-  background: #2b2b2b;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-}
-
-body.dark #noteContent {
-  color: #ccc;
-}
-
-body.dark .back-btn {
-  background: #0284c7;
-}
-
-body.dark .back-btn:hover {
-  background: #0369a1;
+  .back-btn,
+  .download-btn {
+    width: 100%;
+    text-align: center;
+  }
 }

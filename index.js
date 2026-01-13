@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const { nanoid } = require("nanoid");
 const path = require("path");
-
 const app = express();
 
 // Middleware
@@ -161,7 +160,7 @@ app.put("/note/:noteId", async (req, res) => {
 // ------------------------
 app.delete("/note/:noteId", async (req, res) => {
   try {
-    const deleted = await Note.findOneAndDelete({ noteId: req.params.noteId });
+    const deleted = await Note.findOneAndDelete({ _id: req.params.noteId });
 
     if (!deleted) return res.status(404).json({ message: "Note not found" });
     res.json({ message: "Note deleted successfully" });
