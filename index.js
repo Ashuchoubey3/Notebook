@@ -174,14 +174,14 @@ app.delete("/note/:noteId", async (req, res) => {
 // ------------------------
 app.get("/note/view/:id", async (req, res) => {
   try {
-    const note = await Note.find({ _id: req.params.id });
+    const note = await Note.findOne({ _id: req.params.id });
 
     if (!note) {
       return res.status(404).json({ message: "Note not found" });
     }
-    
+    console.log("Viewed note:", note);
 
-    res.json({ note: note[0] });
+    res.json({ note: note });
   } catch (err) {
     console.error("View note error:", err);
     res.status(500).json({ message: "Error fetching note" });

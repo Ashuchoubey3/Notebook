@@ -6,7 +6,7 @@ const backendURL =
     ? "http://localhost:3000"
     : "https://book-38lz.onrender.com";
 
-// 
+//
 // ------------------------
 // GET noteId FROM URL
 // ------------------------
@@ -30,6 +30,7 @@ async function loadNote() {
     }
 
     const data = await res.json();
+    console.log(data, "data in view-note.js");
 
     document.getElementById("noteTitle").innerText = data.note.title;
     document.getElementById("noteContent").innerText = data.note.content;
@@ -63,4 +64,3 @@ function downloadNote() {
   document.body.removeChild(a);
   window.URL.revokeObjectURL(url);
 }
-
