@@ -36,7 +36,8 @@ async function loadNote() {
     document.getElementById("noteContent").innerText = data.note.content;
   } catch (err) {
     console.error(err);
-    document.getElementById("noteContent").innerText = " No note found";
+    document.getElementById("noteContent").innerText =
+      " Still working on it, please have patience :) ";
   }
 }
 
