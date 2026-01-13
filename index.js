@@ -9,15 +9,12 @@ const app = express();
 // Middleware
 app.use(express.json());
 
-
 app.use(
   cors({
     origin: "*", // or "https://your-frontend-domain.com"
     credentials: true,
   })
 );
-
-
 
 // MongoDB Connection
 const mongoUri = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/notebook";
@@ -177,19 +174,19 @@ app.delete("/note/:noteId", async (req, res) => {
 // ------------------------
 app.get("/note/view/:id", async (req, res) => {
   try {
-    const note = await Note.findById(req.params.id);
+    const note = await Note.find({ _id: req.params.id });
 
     if (!note) {
       return res.status(404).json({ message: "Note not found" });
     }
+    
 
-    res.json({ note });
+    res.json({ note: note[0] });
   } catch (err) {
     console.error("View note error:", err);
     res.status(500).json({ message: "Error fetching note" });
   }
 });
-
 
 // Get single note by noteId
 // app.get("/noteById/:noteId", async (req, res) => {
