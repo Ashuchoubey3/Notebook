@@ -94,7 +94,6 @@ function copyUniqueId() {
   });
 }
 
-
 // ------------------------
 // LOGIN
 // ------------------------
@@ -137,3 +136,12 @@ document
       alert("Login error. Please try again.");
     }
   });
+
+const redirectWhenAlreadyLoggedIn = () => {
+  const uniqueId = localStorage.getItem("uniqueId");
+  if (uniqueId) {
+    window.location.href = "dashboard.html";
+  }
+};
+
+redirectWhenAlreadyLoggedIn();
